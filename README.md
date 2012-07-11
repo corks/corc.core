@@ -1,4 +1,4 @@
-cork.core
+ynys.core
 =========
 
-libcork core components
+libynys core components

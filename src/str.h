@@ -1,8 +1,8 @@
 #include <string.h>
 
-typedef struct CorkString CorkString;
+typedef struct YnysString YnysString;
 
-struct CorkString
+struct YnysString
 {
     char *string;
     char *end;
@@ -10,8 +10,8 @@ struct CorkString
     size_t size;
 };
 
-size_t corkstr_concat_raw(char *dst, const char *src, size_t siz);
-size_t corkstr_copy_raw(char *dst, const char *src, size_t siz);
+size_t ynys_str_concat_raw(char *dst, const char *src, size_t siz);
+size_t ynys_str_copy_raw(char *dst, const char *src, size_t siz);
 
-CorkString *corkstr_create(void);
-size_t corkstr_append(CorkString *cs, const char *src, size_t len);
+YnysString *corkstr_create(void);
+size_t ynys_str_append(YnysString *cs, const char *src, size_t len);

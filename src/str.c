@@ -1,11 +1,11 @@
 #include <stdlib.h>
 #include "str.h"
 
-#ifndef CORKSTR_DEFAULT_NEW
-#define CORKSTR_DEFAULT_NEW 64
+#ifndef YNYS_STR_DEFAULT_NEW
+#define YNYS_STR_DEFAULT_NEW 64
 #endif
 
-size_t corkstr_concat_raw(char *dst, const char *src, size_t siz)
+size_t ynys_str_concat_raw(char *dst, const char *src, size_t siz)
 {
     char *d;
     const char *s;
@@ -35,7 +35,7 @@ size_t corkstr_concat_raw(char *dst, const char *src, size_t siz)
     return (dlen + (s - src));
 }
 
-size_t corkstr_copy_raw(char *dst, const char *src, size_t siz)
+size_t ynys_str_copy_raw(char *dst, const char *src, size_t siz)
 {
     char *d;
     const char *s;
@@ -64,13 +64,13 @@ size_t corkstr_copy_raw(char *dst, const char *src, size_t siz)
     return (s - src - 1);
 }
 
-CorkString *corkstr_create(void)
+YnysString *ynysstr_create(void)
 {
-    CorkString *s;
+    YnysString *s;
 
-    s = malloc(sizeof(CorkString));
-    s->size = CORKSTR_DEFAULT_NEW;
-    s->string = malloc(CORKSTR_DEFAULT_NEW);
+    s = malloc(sizeof(YnysString));
+    s->size = YNYS_STR_DEFAULT_NEW;
+    s->string = malloc(YNYS_STR_DEFAULT_NEW);
     *s->string = '\0';
     s->end = s->string;
     s->len = 0;
@@ -78,7 +78,7 @@ CorkString *corkstr_create(void)
     return s;
 }
 
-size_t corkstr_append(CorkString *cs, const char *src, size_t len)
+size_t ynys_str_append(YnysString *cs, const char *src, size_t len)
 {
     char *p;
     const char *s;
