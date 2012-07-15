@@ -1,4 +1,4 @@
-ynys.core
+corc.core
 =========
 
-libynys core components
+libcorc core components

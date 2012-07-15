@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 #include "str.h"
 
 #ifndef CORCSTR_DEFAULT_NEW
@@ -69,8 +70,18 @@ CorcString *corcstr_create(void)
     CorcString *s;
 
     s = malloc(sizeof(CorcString));
+    if (s == NULL)
+    {
+        printf("Malloc broke: %d", __LINE__);
+        exit(1);
+    }
     s->size = CORCSTR_DEFAULT_NEW;
     s->string = malloc(CORCSTR_DEFAULT_NEW);
+    if (s->string == NULL)
+    {
+        printf("Malloc broke: %d", __LINE__);
+        exit(1);
+    }
     *s->string = '\0';
     s->end = s->string;
     s->len = 0;
@@ -106,6 +117,8 @@ size_t corcstr_append(CorcString *cs, const char *src, size_t len)
     cs->end = p;
     cs->len = cs->len + rlen;
 
+    printf("Length: %lu %lu\n", strlen(cs->string), cs->len);
+
     return cs->len;
 }
 
@@ -115,11 +128,11 @@ size_t corcstr_remove(CorcString *cs, size_t len)
     char *start;
 
     i = 0;
-    *start = *cs->end - len;
+    start = cs->end - (len + 1);
 
-    while (*start++)
+    while (--len && *start != '\0')
     {
-        *start = '\0';
+        *start++ = '\0';
         i++;
     }
     cs->len = cs->len - i;
@@ -129,7 +142,7 @@ size_t corcstr_remove(CorcString *cs, size_t len)
 
 CorcString *corkstr_join(char **words, char sep, size_t count)
 {
-    int i;
+    unsigned int i;
     CorcString *cs;
     cs = corcstr_create();
 
