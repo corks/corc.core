@@ -21,6 +21,17 @@ extern size_t corcstr_remove(CorcString *cs, size_t len);
 
 extern CorcString *corcstr_join(char **words, char sep, size_t count);
 
+CorcString *corcstr(const char *in)
+{
+    CorcString *s;
+
+    s = corcstr_create();
+    if (in != NULL)
+        corcstr_append(s, in, sizeof(in));
+    
+    return s;
+}
+
 static inline size_t corcstr_resize(CorcString *cs, size_t siz)
 {
     cs->string = realloc(cs->string, siz);
@@ -41,9 +52,6 @@ static inline size_t corcstr_append_char(CorcString *cs, char c)
         return cs->len;
     }
 
-    //*cs->end++ = c;
-    //*(++cs->end + 1) = c;
-    printf("%lu %lu\n", strlen(cs->string), cs->len);
     cs->string[cs->len] = c;
     cs->string[cs->len+1] = '\0'; 
     return ++cs->len;

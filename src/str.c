@@ -89,6 +89,16 @@ CorcString *corcstr_create(void)
     return s;
 }
 
+void corcstr_destroy(CorcString *cs)
+{
+    if (cs == NULL)
+        return;
+
+    if (cs->string != NULL)
+        free(cs->string);
+    free(cs);
+}
+
 size_t corcstr_append(CorcString *cs, const char *src, size_t len)
 {
     char *p;
