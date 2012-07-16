@@ -150,7 +150,7 @@ size_t corcstr_remove(CorcString *cs, size_t len)
     return cs->len;
 }
 
-CorcString *corkstr_join(char **words, char sep, size_t count)
+CorcString *corcstr_join(char **words, char sep, size_t count)
 {
     unsigned int i;
     CorcString *cs;
@@ -164,3 +164,35 @@ CorcString *corkstr_join(char **words, char sep, size_t count)
 
     return cs;
 }
+
+CorcString **corcstr_split(CorcString *in, char sep)
+{
+    int i = 0;
+    char *instr, *ptr, *placeholder;
+    CorcString **out, *cs;
+
+    instr = strdup(in->string);
+    placeholder = instr;
+
+    while (ptr = strchr(placeholder, sep))
+    {
+        *ptr = '\0';
+        out[i] = corcstr(placeholder);
+        placeholder = ptr+1;
+        ++i;
+    }
+    if (placeholder)
+    {
+        out[i] = corcstr(placeholder);
+        out[++i] = NULL;
+    }
+    else if (i == 0)
+    {
+        free(instr);
+        return NULL;
+    }
+
+    free(instr);
+    return out;
+}
+
