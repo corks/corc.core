@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include "str.h"
 
 #ifndef CORCSTR_DEFAULT_NEW
@@ -118,10 +119,10 @@ size_t corcstr_append(CorcString *cs, const char *src, size_t len)
     p = cs->end;
     s = src;
 
-    do
+    while (*s)
     {
-        *p++ = *s;
-    } while (*s++);
+        *p++ = *s++;
+    }
     *p = '\0';
 
     cs->end = p;
@@ -169,12 +170,13 @@ CorcString **corcstr_split(CorcString *in, char sep)
 {
     int i = 0;
     char *instr, *ptr, *placeholder;
-    CorcString **out, *cs;
+    CorcString **out;
 
     instr = strdup(in->string);
+    out = malloc(sizeof(CorcString));
     placeholder = instr;
 
-    while (ptr = strchr(placeholder, sep))
+    while ((ptr = strchr(placeholder, sep)))
     {
         *ptr = '\0';
         out[i] = corcstr(placeholder);
@@ -195,4 +197,3 @@ CorcString **corcstr_split(CorcString *in, char sep)
     free(instr);
     return out;
 }
-

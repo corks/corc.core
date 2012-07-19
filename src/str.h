@@ -21,7 +21,7 @@ extern size_t corcstr_remove(CorcString *cs, size_t len);
 
 extern CorcString *corcstr_join(char **words, char sep, size_t count);
 
-CorcString *corcstr(const char *in)
+static inline CorcString *corcstr(const char *in)
 {
     CorcString *s;
 
@@ -55,5 +55,15 @@ static inline size_t corcstr_append_char(CorcString *cs, char c)
     cs->string[cs->len] = c;
     cs->string[cs->len+1] = '\0'; 
     return ++cs->len;
+}
+
+static inline void corcstr_clear(CorcString *cs)
+{
+    unsigned int i;
+
+    for (i = 0; i < cs->size; ++i)
+        cs->string[i] = '\0';
+    cs->len = 0;
+    cs->end = cs->string;
 }
 
