@@ -1,3 +1,6 @@
+#ifndef CORC_CORE_STR_H
+#define CORC_CORE_STR_H
+
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -67,3 +70,4 @@ static inline void corcstr_clear(CorcString *cs)
     cs->end = cs->string;
 }
 
+#endif /* CORC_CORE_STR_H */
