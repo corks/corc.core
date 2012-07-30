@@ -24,4 +24,8 @@ elseif(CMAKE_C_COMPILER MATCHES "pathcc" OR "opencc"
     set(CMAKE_C_FLAGS_OPTDEBUG "-g3 -noinline -W -Wall")
 endif()
 
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/t")
 add_subdirectory(src)
+if($ENV{CORC_TESTING} MATCHES 1)
+    add_subdirectory(t)
+endif()

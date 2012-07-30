@@ -6,7 +6,7 @@ file(GLOB HDRS *.h)
 add_library(corc.core SHARED ${SRCS} ${HDRS})
 set_target_properties(corc.core PROPERTIES VERSION ${CORC_VERSION} SOVERSION 0)
 
-install(FILES ${HDRS} DESTINATION include)
+install(FILES ${HDRS} DESTINATION include/libcorc/core)
 install(TARGETS corc.core DESTINATION lib
     PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE
     WORLD_READ WORLD_EXECUTE)
