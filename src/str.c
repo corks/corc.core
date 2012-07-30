@@ -128,8 +128,6 @@ size_t corcstr_append(CorcString *cs, const char *src, size_t len)
     cs->end = p;
     cs->len = cs->len + rlen;
 
-    printf("Length: %lu %lu\n", strlen(cs->string), cs->len);
-
     return cs->len;
 }
 
