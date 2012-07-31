@@ -72,10 +72,18 @@ CorcString *corcstr_create(void)
     CorcString *s;
 
     s = corc_alloc(sizeof(CorcString));
-
+    if (s == NULL)
+    {
+        printf("corc_alloc broke: %d", __LINE__);
+        exit(1);
+    }
     s->size = CORCSTR_DEFAULT_NEW;
     s->string = corc_alloc(CORCSTR_DEFAULT_NEW);
-    
+    if (s->string == NULL)
+    {
+        printf("corc_alloc broke: %d", __LINE__);
+        exit(1);
+    }
     *s->string = '\0';
     s->end = s->string;
     s->len = 0;
