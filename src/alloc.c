@@ -1,12 +1,14 @@
-#include <stdio.h>
+#ifdef CORC_VERBOSE
+#   include <stdio.h>
+#endif
 #include <stdlib.h>
 #include "alloc.h"
 
-
-
 static void bad_callback(void)
 {
+#ifdef CORC_VERBOSE
     fprintf(stderr, "Memory allocation failed. Exiting to avoid more things breaking...\n");
+#endif
     exit(1);
 }
 
