@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include "alloc.h"
 #include "str.h"
 
 #ifndef CORCSTR_DEFAULT_NEW
@@ -70,17 +71,17 @@ CorcString *corcstr_create(void)
 {
     CorcString *s;
 
-    s = malloc(sizeof(CorcString));
+    s = corc_alloc(sizeof(CorcString));
     if (s == NULL)
     {
-        printf("Malloc broke: %d", __LINE__);
+        printf("corc_alloc broke: %d", __LINE__);
         exit(1);
     }
     s->size = CORCSTR_DEFAULT_NEW;
-    s->string = malloc(CORCSTR_DEFAULT_NEW);
+    s->string = corc_alloc(CORCSTR_DEFAULT_NEW);
     if (s->string == NULL)
     {
-        printf("Malloc broke: %d", __LINE__);
+        printf("corc_alloc broke: %d", __LINE__);
         exit(1);
     }
     *s->string = '\0';
@@ -171,7 +172,7 @@ CorcString **corcstr_split(CorcString *in, char sep)
     CorcString **out;
 
     instr = strdup(in->string);
-    out = malloc(sizeof(CorcString));
+    out = corc_alloc(sizeof(CorcString));
     placeholder = instr;
 
     while ((ptr = strchr(placeholder, sep)))
